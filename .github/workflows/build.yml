@@ -8,9 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Appknox Scan
-      uses: ashujha301/appknox-github-actions
+      uses: ashujha301/appknox-github-actions@main
       with:
         appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
         file_path: apk-binary-code/sample-app.apk
-        risk_threshold: LOW
+        risk_threshold: MEDIUM

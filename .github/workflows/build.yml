@@ -6,24 +6,37 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_RUNNER_DEBUG: true
     steps:
     - uses: actions/checkout@v2
 
     - name: Appknox Scan
-      id: appknox-scan
+      id: appknox_scan
       uses: ashujha301/appknox-github-actions@main
       with:
         appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
         file_path: apk-binary-code/sample-app.apk
-        risk_threshold: MEDIUM
+        risk_threshold: LOW
 
-    - name: Display Scan Output
-      run: echo "${{ steps.appknox-scan.outputs.scan-output }}"
-      
-    - name: Generate SARIF Output
-      id: sarif-output
-      run: echo "${{ steps.appknox-scan.outputs.scan-output }}" | node ./src/tools.js
-      shell: bash
+    # - name: Download and Save Summary CSV Report
+    #   if: always()
+    #   run: |
+    #     fileId=$(appknox upload apk-binary-code/sample-app.apk) && 
+    #     appknox cicheck $fileId &&
+    #     reportId=$(appknox reports create $fileId) &&
+    #     appknox reports download summary-csv $reportId --output summary.csv
+    #   continue-on-error: true
 
-    - name: Display SARIF Output
-      run: echo "${{ steps.sarif-output.outputs.sarif-output }}"
+    # - name: Download CSV Report
+    #   if: always()
+    #   run: |
+    #     curl -O https://api.appknox.com/${{ steps.appknox_scan.outputs.fileID }}/report/summary.csv
+    #     cat summary.csv
+
+    # - name: Upload CSV Report as Artifact
+    #   if: always()
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: summary-report
+    #     path: summary.csv

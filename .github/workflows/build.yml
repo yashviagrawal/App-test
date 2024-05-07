@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Appknox Scan
-      uses: appknox-github-action
+      uses: ashujha301/appknox-github-action
       with:
         appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
         file_path: apk-binary-code/sample-app.apk

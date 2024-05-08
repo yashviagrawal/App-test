@@ -13,30 +13,8 @@ jobs:
 
     - name: Appknox Scan
       id: appknox_scan
-      uses: ashujha301/appknox-github-actions@main
+      uses: ashujha301/scan-github-action@main
       with:
         appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
         file_path: apk-binary-code/sample-app.apk
         risk_threshold: LOW
-
-    # - name: Download and Save Summary CSV Report
-    #   if: always()
-    #   run: |
-    #     fileId=$(appknox upload apk-binary-code/sample-app.apk) && 
-    #     appknox cicheck $fileId &&
-    #     reportId=$(appknox reports create $fileId) &&
-    #     appknox reports download summary-csv $reportId --output summary.csv
-    #   continue-on-error: true
-
-    # - name: Download CSV Report
-    #   if: always()
-    #   run: |
-    #     curl -O https://api.appknox.com/${{ steps.appknox_scan.outputs.fileID }}/report/summary.csv
-    #     cat summary.csv
-
-    # - name: Upload CSV Report as Artifact
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: summary-report
-    #     path: summary.csv

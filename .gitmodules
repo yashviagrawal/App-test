@@ -1,3 +1,0 @@
-[submodule "scan-github-action"]
-	path = scan-github-action
-	url = https://github.com/ashujha301/scan-github-action.git

@@ -10,8 +10,10 @@ jobs:
       ACTIONS_RUNNER_DEBUG: true
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Static Scan
+      
+
+    - name: Appknox Scan
+      id: appknox_scan
       uses: ashujha301/scan-github-action@main
       env:
         ACTIONS_RUNNER_DEBUG: true
@@ -19,3 +21,16 @@ jobs:
         appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
         file_path: apk-binary-code/sample-app.apk
         risk_threshold: LOW
+      # continue-on-error: true
+
+    # - name: Download CSV Report
+    #   if: always()
+    #   run: |
+    #     curl -O https://api.appknox.com/api/v2/reports/${{ steps.appknox_scan.outputs.fileID }}/summary_csv
+
+    # - name: Upload CSV Report as Artifact
+    #   if: always()
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: summary-csv
+    #     path: summary.csv

@@ -14,13 +14,14 @@ jobs:
 
     - name: Appknox Scan
       id: appknox_scan
-      uses: "ashujha301/scan-github-action@1.0.2"
+      uses: "ashujha301/appknox-github-action@main"
       env:
         ACTIONS_RUNNER_DEBUG: true
       with:
         appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
         file_path: apk-binary-code/sample-app.apk
-        risk_threshold: LOW
+        risk_threshold: MEDIUM
+        sarif: true
       # continue-on-error: true
 
     # - name: Download CSV Report

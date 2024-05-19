@@ -22,16 +22,11 @@ jobs:
         file_path: apk-binary-code/sample-app.apk
         risk_threshold: MEDIUM
         sarif: 'true'
-      #continue-on-error: true
-
-    # - name: Download CSV Report
-    #   if: always()
-    #   run: |
-    #     curl -O https://api.appknox.com/api/v2/reports/${{ steps.appknox_scan.outputs.fileID }}/summary_csv
-
-    # - name: Upload CSV Report as Artifact
-    #   if: always()
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: summary-csv
-    #     path: summary.csv
+      continue-on-error: true
+    
+    - name: Upload SARIF Report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: sarif-report
+        path: report.sarif.json

@@ -10,9 +10,7 @@ jobs:
       ACTIONS_RUNNER_DEBUG: true
     steps:
     - uses: actions/checkout@v2
-
-    - name: Set SARIF Environment Variable
-      run: echo "SARIF_ENABLED=${{steps.appknox_scan.outputs.sarif}}" >> $GITHUB_ENV
+      
 
     - name: Appknox Scan
       id: appknox_scan
@@ -23,18 +21,18 @@ jobs:
         appknox_access_token: ${{secrets.APPKNOX_ACCESS_TOKEN}}
         file_path: apk-binary-code/sample-app.apk
         risk_threshold: MEDIUM
-        sarif: 'true'
+        sarif: 'false'
       continue-on-error: true
     
     - name: Upload SARIF Report
-      if: env.SARIF_ENABLED == 'true'
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: sarif-report
         path: report.sarif.json
 
     - name: Upload SARIF to GHAS
-      if: env.SARIF_ENABLED == 'true'
+      if: always()
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: report.sarif.json

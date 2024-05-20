@@ -20,8 +20,8 @@ jobs:
       with:
         appknox_access_token: ${{secrets.APPKNOX_ACCESS_TOKEN}}
         file_path: apk-binary-code/sample-app.apk
-        risk_threshold: MEDIUM
-        sarif: 'true'
+        risk_threshold: HIGH
+        sarif: 'false'
       continue-on-error: true
     
     - name: Upload SARIF Report

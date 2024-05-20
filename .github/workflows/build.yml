@@ -17,19 +17,19 @@ jobs:
 
     - name: Appknox Scan
       id: appknox_scan
-      uses: "ashujha301/appknox-github-action@main"
+      uses: "ashujha301/appknox-github-action@feature"
       env:
         ACTIONS_RUNNER_DEBUG: true
       with:
         appknox_access_token: ${{secrets.APPKNOX_ACCESS_TOKEN}}
         file_path: apk-binary-code/sample-app.apk
-        risk_threshold: MEDIUM
+        risk_threshold: HIGH
         sarif: 'true'
       continue-on-error: true
-    
+
     - name: Upload SARIF Report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: sarif-report
         path: report.sarif.json

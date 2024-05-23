@@ -32,10 +32,10 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: sarif-report
-        path: report.sarif.json
+        path: report.sarif
 
     - name: Upload SARIF to GHAS
       if: always()
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: report.sarif.json
+        sarif_file: report.sarif

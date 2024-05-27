@@ -4,8 +4,9 @@ on:
     branches:
       - main
 permissions:
-  contents: read
   security-events: write
+  contents: read
+  actions: read
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,25 +18,18 @@ jobs:
 
     - name: Appknox Scan
       id: appknox_scan
-      uses: "ashujha301/appknox-github-action@main"
+      uses: "ashujha301/appknox-github-action@feature"
       env:
         ACTIONS_RUNNER_DEBUG: true
       with:
         appknox_access_token: ${{secrets.APPKNOX_ACCESS_TOKEN}}
         file_path: apk-binary-code/sample-app.apk
         risk_threshold: HIGH
-        sarif: 'true'
-      continue-on-error: true
+        sarif: Enable
 
     - name: Upload SARIF Report
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: sarif-report
         path: report.sarif
-
-    - name: Upload SARIF to GHAS
-      if: always()
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: report.sarif

@@ -27,7 +27,7 @@ jobs:
         file_path: apk-binary-code/sample-app.apk
         risk_threshold: HIGH
         sarif: Enable
-        api_host: 'dubai'
+        api_host: 'europe'
 
     - name: Upload SARIF Report
       if: always()

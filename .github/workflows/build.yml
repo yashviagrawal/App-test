@@ -25,7 +25,7 @@ jobs:
       with:
         appknox_access_token: e5987b09d295dfc38e99f192fd3345af58f48363
         file_path: apk-binary-code/sample-app.apk
-        risk_threshold: HIGH
+        risk_threshold: CRITICAL
         sarif: Enable
         api_host: 'europe'
 

@@ -22,7 +22,7 @@ jobs:
         env:
           ACTIONS_RUNNER_DEBUG: true
         with:
-          appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
+          appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }} #set
           file_path: apk-binary-code/sample-app.apk
           risk_threshold: CRITICAL
           sarif: Enable

@@ -14,24 +14,23 @@ jobs:
     env:
       ACTIONS_RUNNER_DEBUG: true
     steps:
-    - uses: actions/checkout@v2
-      
+      - uses: actions/checkout@v2
 
-    - name: Appknox Scan
-      id: appknox_scan
-      uses: "yashviagrawal/appknox-github-action@main" #main
-      env:
-        ACTIONS_RUNNER_DEBUG: true
-      with:
-        appknox_access_token: e5987b09d295dfc38e99f192fd3345af58f48363
-        file_path: apk-binary-code/sample-app.apk
-        risk_threshold: CRITICAL
-        sarif: Enable
-        api_host: 'europe'
+      - name: Appknox Scan
+        id: appknox_scan
+        uses: "yashviagrawal/appknox-github-action@main" #main
+        env:
+          ACTIONS_RUNNER_DEBUG: true
+        with:
+          appknox_access_token: ${{ secrets.APPKNOX_ACCESS_TOKEN }}
+          file_path: apk-binary-code/sample-app.apk
+          risk_threshold: CRITICAL
+          sarif: Enable
+          api_host: 'europe'
 
-    - name: Upload SARIF Report
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: sarif-report
-        path: report.sarif
+      - name: Upload SARIF Report
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: sarif-report
+          path: report.sarif

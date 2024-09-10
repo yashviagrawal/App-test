@@ -26,7 +26,7 @@ jobs:
           file_path: apk-binary-code/sample-app.apk
           risk_threshold: CRITICAL
           sarif: Enable
-          api_host: 'europe'
+          region: 'Global'
 
       - name: Upload SARIF Report
         if: always()
